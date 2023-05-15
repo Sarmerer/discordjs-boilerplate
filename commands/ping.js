@@ -1,5 +1,5 @@
-const { Command } = require("../types/command");
-const { CommandStringOption } = require("../types/command-options");
+const { Command } = require("../command");
+const { CommandStringOption } = require("../command-options");
 
 const ping = new Command({
   name: "ping",

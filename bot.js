@@ -112,11 +112,11 @@ class Bot {
     try {
       const commands = new Map();
       const commandFiles = fs
-        .readdirSync("./src/commands")
+        .readdirSync("./commands")
         .filter((file) => file.endsWith(".js"));
 
       for (const file of commandFiles) {
-        const { command } = require(`../commands/${file}`);
+        const { command } = require(`./commands/${file}`);
         const commandName = command.name
           ? command.name
           : file.replace(".js", "");
@@ -133,13 +133,14 @@ class Bot {
   attachEvents() {
     try {
       const eventFiles = fs
-        .readdirSync("./src/events")
+        .readdirSync("./events")
         .filter((file) => file.endsWith(".js"));
 
       for (const fileName of eventFiles) {
-        const event = require(`../events/${fileName}`);
-
         const eventName = fileName.replace(".js", "");
+        if (eventName == "index") continue;
+
+        const event = require(`./events/${fileName}`);
         const handler = this.createEventHandler(event.handler);
 
         switch (event.method) {

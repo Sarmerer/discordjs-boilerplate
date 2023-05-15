@@ -1,4 +1,4 @@
-const { once } = require("../types/events");
+const { once } = require(".");
 
 module.exports = once(async function () {
   console.log("Ready!");

@@ -1,4 +1,4 @@
-const { on } = require("../types/events");
+const { on } = require(".");
 
 module.exports = on(async function ({ bot, payload }) {
   const [interaction] = payload;

@@ -2,11 +2,11 @@
   "name": "discord-bot",
   "version": "1.0.0",
   "description": "An overengineered discord.js bot boilerplate",
-  "main": "./src/index.js",
+  "main": "./index.js",
   "scripts": {
-    "dev": "node ./src/index.js",
-    "dev-commands": "npm run sync-commands && npm run dev",
-    "sync-commands": "node ./src/scripts/sync-slash-commands.js"
+    "start": "npm run sync-commands && npm run dev",
+    "sync-commands": "node ./scripts/sync-slash-commands.js",
+    "dev": "node ./index.js"
   },
   "repository": {
     "type": "git",
