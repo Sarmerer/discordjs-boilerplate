@@ -1,11 +1,11 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 class CommandOption {
   /**
-   * @param {object} options
-   * @param {string} options.name
-   * @param {string} options.description
-   * @param {boolean} options.required
+   * @param {Object} options
+   * @param {String} options.name
+   * @param {String} options.description
+   * @param {Boolean} options.required
    */
   constructor(options) {
     this.name_ = options.name;
@@ -63,8 +63,8 @@ class CommandBooleanOption extends CommandOption {
 
 class CommandStringOption extends CommandOption {
   /**
-   * @param {object} options
-   * @param {Array<Object<name: string, value: string>>} options.choices
+   * @param {Object} options
+   * @param {Array<Object<name: String, value: String>>} options.choices
    */
   constructor(options) {
     super(options);

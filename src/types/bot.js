@@ -1,4 +1,4 @@
-const { Client, Intents } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 const { Database } = require("./db");
 const path = require("node:path");
 
@@ -42,10 +42,10 @@ class Bot {
     /** @type {BotConfig} */
     this.config_ = config;
 
-    /** @type {string[]} */
+    /** @type {String[]} */
     this.intents_ = [];
 
-    /** @type {Map<string, Command>} */
+    /** @type {Map<String, Command>} */
     this.commands_ = new Map();
 
     /** @type {Client} */
@@ -136,22 +136,18 @@ class Bot {
         .readdirSync("./src/events")
         .filter((file) => file.endsWith(".js"));
 
-      for (const file of eventFiles) {
-        const event = require(`../events/${file}`);
+      for (const fileName of eventFiles) {
+        const event = require(`../events/${fileName}`);
 
-        const trigger =
-          typeof event.trigger === "string"
-            ? event.trigger
-            : file.replace(".js", "");
-
+        const eventName = fileName.replace(".js", "");
         const handler = this.createEventHandler(event.handler);
 
         switch (event.method) {
           case "once":
-            this.client_.once(trigger, handler);
+            this.client_.once(eventName, handler);
             break;
           case "on":
-            this.client_.on(trigger, handler);
+            this.client_.on(eventName, handler);
             break;
           default:
             throw new Error(`Unknown event method: ${event.method}`);
@@ -176,7 +172,7 @@ class Bot {
     this.commands_ = this.readCommands();
 
     this.client_ = new Client({
-      intents: [Intents.FLAGS.GUILDS, ...this.intents_],
+      intents: [...this.intents_],
     });
 
     console.log("Attaching events...");

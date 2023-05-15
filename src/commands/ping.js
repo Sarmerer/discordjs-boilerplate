@@ -13,7 +13,7 @@ const ping = new Command({
     }),
   ],
 
-  execute: async ({ interaction, bot }) => {
+  async execute({ interaction }) {
     const { options } = interaction;
     const customText = options.getString("text");
 

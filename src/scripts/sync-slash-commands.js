@@ -1,6 +1,4 @@
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
-
+const { REST, Routes } = require("discord.js");
 const { token, clientId } = require("../../config.json");
 
 const fs = require("node:fs");
@@ -26,7 +24,7 @@ for (const file of commandFiles) {
   try {
     console.log("Started refreshing application (/) commands.");
 
-    const rest = new REST({ version: "9" }).setToken(token);
+    const rest = new REST({ version: "10" }).setToken(token);
     await rest.put(Routes.applicationCommands(clientId), { body: commands });
 
     console.log("Successfully reloaded application (/) commands.");

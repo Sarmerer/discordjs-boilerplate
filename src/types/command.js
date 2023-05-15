@@ -1,27 +1,37 @@
-const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Interaction } = require("discord.js");
+const {
+  ChatInputCommandInteraction,
+  SlashCommandBuilder,
+} = require("discord.js");
 const { CommandOption } = require("./command-options");
+
+/**
+ * @typedef {Object} ExecutePayload
+ * @property {ChatInputCommandInteraction} interaction
+ * @property {Bot} bot
+ *
+ * @callback Execute
+ * @param {ExecutePayload} payload
+ */
 
 class Command {
   /**
-   *
-   * @param {object} options
-   * @param {string} options.name
-   * @param {string} options.description
+   * @param {Object} options
+   * @param {String} options.name
+   * @param {String} options.description
    * @param {CommandOption[]} options.options
    * @param {Command[]} options.subcommands
-   * @param {function} options.execute
+   * @param {Execute} options.execute
    *
    * @returns {Command}
    */
   constructor(options) {
-    /** @type {string} */
+    /** @type {String} */
     this.name = options.name;
 
-    /** @type {string} */
+    /** @type {String} */
     this.description = options.description;
 
-    /** @type {Map<string, Command>} */
+    /** @type {Map<String, Command>} */
     this.subcommands = new Map();
 
     /** @type {CommandOption[]} */
@@ -88,7 +98,7 @@ class Command {
   }
 
   /**
-   * @param {object} payload
+   * @param {Object} payload
    * @param {Bot} payload.bot
    * @param {Interaction} payload.interaction
    */
